@@ -1,5 +1,7 @@
 package br.com.mateusparente.pizzaria.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +23,7 @@ public class Pedido {
 
 	@Id
 	@Column(nullable = false, name="ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@OneToOne(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
@@ -31,6 +33,6 @@ public class Pedido {
 	private Integer tempoDePreparo;
 	
 	@Column(name = "VALOR_FINAL", nullable = false, precision = 15, scale = 2)
-	private Integer valorFinal;
+	private BigDecimal valorFinal;
 	
 }

@@ -8,21 +8,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name="PIZZA_SABOR")
 public class SaborDaPizza {
 
 	@Id
 	@Column(nullable = false, name="ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name="DESCRICAO", nullable = false)
 	private String descricao;
 	
-	@Column(name="VALOR", nullable = false)
+	@Column(name="TEMPO_ADICIONAL", nullable = false)
 	private Integer tempoAdicional;
 	
 }

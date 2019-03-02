@@ -27,7 +27,7 @@ public class Pizza {
 
 	@Id
 	@Column(nullable = false, name="ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@OneToOne(fetch = FetchType.LAZY)

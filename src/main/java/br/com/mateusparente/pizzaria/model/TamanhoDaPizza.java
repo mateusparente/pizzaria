@@ -10,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 @Entity
 @Table(name="PIZZA_TAMANHO")
@@ -18,7 +20,7 @@ public class TamanhoDaPizza {
 
 	@Id
 	@Column(nullable = false, name="ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name="DESCRICAO", nullable = false)
