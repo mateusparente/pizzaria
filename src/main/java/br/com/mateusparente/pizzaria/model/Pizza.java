@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,14 +36,19 @@ public class Pizza extends ApiModel {
 	@MapsId
 	private Pedido pedido;
 	
+	@Valid
+	@NotNull(message = "Nenhum tamanho selecionado")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PIZZA_TAMANHO_ID", nullable = false, referencedColumnName="ID")
 	private TamanhoDaPizza tamanho;
 	
+	@Valid
+	@NotNull(message = "Nenhum sabor selecionado")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PIZZA_SABOR_ID", nullable = false, referencedColumnName="ID")
 	private SaborDaPizza sabor;
 	
+	@Valid
 	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="PIZZA_PERSONALIZACAO_PIZZA", joinColumns= {@JoinColumn(name="PIZZA_ID")}, inverseJoinColumns={@JoinColumn(name="PIZZA_PERSONALIZACAO_ID")})
 	private List<PersonalizacaoDaPizza> personalizacoes;

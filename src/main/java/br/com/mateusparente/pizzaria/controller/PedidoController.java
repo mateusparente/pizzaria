@@ -32,6 +32,11 @@ public class PedidoController {
 	@Autowired
 	private PedidoService service;
 	
+	@GetMapping
+    public List<Pedido> findAll() {
+		return service.listarTodos();
+	}
+	
 	@GetMapping(path = RotasV1.ID)
 	public ResponseEntity<Pedido> buscarPorID(@PathVariable("id") Long id){
 		return service.buscarPorID(id).map(p -> {
@@ -56,8 +61,10 @@ public class PedidoController {
 	
 	private URI montarLocation(Pedido pedido) {
 		return ServletUriComponentsBuilder
-                .fromCurrentRequest().path(RotasV1.ID)
-                .buildAndExpand(pedido.getId()).toUri();
+                .fromCurrentRequest()
+                .path(RotasV1.ID)
+                .buildAndExpand(pedido.getId())
+                .toUri();
 	}
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

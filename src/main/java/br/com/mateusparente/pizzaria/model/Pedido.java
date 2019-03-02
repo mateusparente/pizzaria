@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,6 +30,7 @@ public class Pedido extends ApiModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Valid
 	@JsonIgnoreProperties("pedido")
 	@NotNull(message = "Nenhuma pizza no pedido")
 	@OneToOne(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
@@ -40,7 +42,13 @@ public class Pedido extends ApiModel {
 	@Column(name = "VALOR_FINAL", nullable = false, precision = 15, scale = 2)
 	private BigDecimal valorFinal;
 
-	public void calcularValorFinal() {
+	public void prepararParaSalvar(){
+		resolverReferencias();
+		calcularValorFinal();
+		calcularTempoDePreparo();
+	}
+	
+	private void calcularValorFinal() {
 		
 		BigDecimal valorCalculado = BigDecimal.ZERO;
 		
@@ -53,7 +61,7 @@ public class Pedido extends ApiModel {
 		setValorFinal(valorCalculado);
 	}
 	
-	public void calcularTempoDePreparo() {
+	private void calcularTempoDePreparo() {
 
 		Integer tempoCalculado = 0;
 		
@@ -67,7 +75,7 @@ public class Pedido extends ApiModel {
 		setTempoDePreparo(tempoCalculado);
 	}
 
-	public void resolverReferencias() {
+	private void resolverReferencias() {
 		pizza.setPedido(this);
 	}
 	

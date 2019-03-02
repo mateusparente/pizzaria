@@ -1,5 +1,6 @@
 package br.com.mateusparente.pizzaria.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,14 @@ public class PedidoServiceImpl implements PedidoService {
 	private PedidoRepository pedidoRepository;
 	
 	@Override
+	public List<Pedido> listarTodos() {
+		return pedidoRepository.findAll();
+	}
+	
+	@Override
 	public Pedido salvar(Pedido pedido) {
 		
-		pedido.calcularValorFinal();
-		pedido.calcularTempoDePreparo();
-		pedido.resolverReferencias();
-		
+		pedido.prepararParaSalvar();
 		return pedidoRepository.saveAndFlush(pedido);
 	}
 	

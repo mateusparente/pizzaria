@@ -99,6 +99,35 @@ public class PedidoServiceImplTest {
 		assertEquals(new Integer("30"), pedido.getTempoDePreparo());
 		
 	}
+	
+	@Test
+	public void deveriaSalvarPedidoCalculandoValores_ComMaisDeUmaPersonalizacao(){
+		
+		List<PersonalizacaoDaPizza> personalizacoes = new ArrayList<>();
+		
+		TamanhoDaPizza tamanhoDaPizza = carregarTamanho("Média");
+		SaborDaPizza saborDaPizza = carregarSabor("Portuguesa");
+		PersonalizacaoDaPizza personalizacaoDaPizza1 = carregarPersonalizacao("Borda recheada");
+		PersonalizacaoDaPizza personalizacaoDaPizza2 = carregarPersonalizacao("Extra bacon");
+		personalizacoes.add(personalizacaoDaPizza1);
+		personalizacoes.add(personalizacaoDaPizza2);
+		
+		Pizza pizza = new Pizza();
+		pizza.setPersonalizacoes(personalizacoes);
+		pizza.setSabor(saborDaPizza);
+		pizza.setTamanho(tamanhoDaPizza);
+		
+		Pedido pedido = new Pedido();
+		pedido.setPizza(pizza);
+		
+		pedidoService.salvar(pedido);
+		assertNotNull(pedido.getId());
+		assertNotNull(pizza.getId());
+		
+		assertEquals(new BigDecimal("38.00"), pedido.getValorFinal());
+		assertEquals(new Integer("30"), pedido.getTempoDePreparo());
+		
+	}
 
 	private TamanhoDaPizza carregarTamanho(String descricao) {
 		TamanhoDaPizza tamanhoDaPizza = new TamanhoDaPizza();
