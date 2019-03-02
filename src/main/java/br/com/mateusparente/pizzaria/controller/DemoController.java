@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(RotasV1.DEMO)
-public class DefaultController {
+public class DemoController {
 
 	@GetMapping
     public String index() {

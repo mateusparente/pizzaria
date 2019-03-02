@@ -9,10 +9,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name="PIZZA_SABOR")
 public class SaborDaPizza extends ApiModel {

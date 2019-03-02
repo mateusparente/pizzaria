@@ -16,11 +16,14 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import static br.com.mateusparente.pizzaria.util.CollectionsUtils.defaultList;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name="PEDIDO")
 public class Pedido extends ApiModel {
@@ -50,13 +53,12 @@ public class Pedido extends ApiModel {
 	
 	private void calcularValorFinal() {
 		
-		BigDecimal valorCalculado = BigDecimal.ZERO;
-		
-		valorCalculado = valorCalculado.add(pizza.getTamanho().getValor());
-		
-		if(pizza.getPersonalizacoes() != null && !pizza.getPersonalizacoes().isEmpty())
-			for (PersonalizacaoDaPizza personalizacaoDaPizza : pizza.getPersonalizacoes())
-				valorCalculado = valorCalculado.add(personalizacaoDaPizza.getValorAdicional());
+		BigDecimal valorCalculado = BigDecimal.ZERO
+						.add(pizza.getTamanho().getValor())
+						.add(defaultList(pizza.getPersonalizacoes())
+								  .stream()
+								  .map(PersonalizacaoDaPizza::getValorAdicional)
+								  .reduce(BigDecimal.ZERO, BigDecimal::add));
 		
 		setValorFinal(valorCalculado);
 	}
@@ -67,10 +69,10 @@ public class Pedido extends ApiModel {
 		
 		tempoCalculado += pizza.getTamanho().getTempoDePreparo();
 		tempoCalculado += pizza.getSabor().getTempoAdicional();
-		
-		if(pizza.getPersonalizacoes() != null && !pizza.getPersonalizacoes().isEmpty())
-			for (PersonalizacaoDaPizza personalizacaoDaPizza : pizza.getPersonalizacoes())
-				tempoCalculado += personalizacaoDaPizza.getTempoAdicional();
+		tempoCalculado += defaultList(pizza.getPersonalizacoes())
+				   			   .stream()
+				   			   .mapToInt(PersonalizacaoDaPizza::getTempoAdicional)
+				   			   .sum();
 		
 		setTempoDePreparo(tempoCalculado);
 	}

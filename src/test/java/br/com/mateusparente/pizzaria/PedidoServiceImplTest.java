@@ -128,6 +128,28 @@ public class PedidoServiceImplTest {
 		assertEquals(new Integer("30"), pedido.getTempoDePreparo());
 		
 	}
+	
+	@Test
+	public void deveriaSalvarPedidoCalculandoValores_SemPersonalizacao(){
+		
+		TamanhoDaPizza tamanhoDaPizza = carregarTamanho("Média");
+		SaborDaPizza saborDaPizza = carregarSabor("Portuguesa");
+		
+		Pizza pizza = new Pizza();
+		pizza.setSabor(saborDaPizza);
+		pizza.setTamanho(tamanhoDaPizza);
+		
+		Pedido pedido = new Pedido();
+		pedido.setPizza(pizza);
+		
+		pedidoService.salvar(pedido);
+		assertNotNull(pedido.getId());
+		assertNotNull(pizza.getId());
+		
+		assertEquals(new BigDecimal("30.00"), pedido.getValorFinal());
+		assertEquals(new Integer("25"), pedido.getTempoDePreparo());
+		
+	}
 
 	private TamanhoDaPizza carregarTamanho(String descricao) {
 		TamanhoDaPizza tamanhoDaPizza = new TamanhoDaPizza();

@@ -10,4 +10,6 @@ public class RotasV1 {
 	public static final String PERSONALIZACAO_DA_PIZZA = "/api/v1/personalizacaoDaPizza";
 	public static final String PEDIDO = "/api/v1/pedido";
 	
+	public static final String CALCULAR_TOTAIS = "/calcularTotais";
+	
 }

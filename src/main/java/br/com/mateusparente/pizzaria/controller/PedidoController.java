@@ -53,6 +53,13 @@ public class PedidoController {
 
 		return ResponseEntity.created(location).build();
 	}
+	
+	@PostMapping(RotasV1.CALCULAR_TOTAIS)
+	public ResponseEntity<Object> calcularTotais(@RequestBody @Valid Pedido pedido){
+		
+		pedido.prepararParaSalvar();
+		return ResponseEntity.ok(pedido);
+	}
 
 	@PutMapping
 	public void atualizar(@RequestBody @Valid Pedido pedido){
