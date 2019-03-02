@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,7 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull(message = "Nenhuma pizza no pedido")
 	@OneToOne(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
 	private Pizza pizza;
 	
@@ -34,5 +36,36 @@ public class Pedido {
 	
 	@Column(name = "VALOR_FINAL", nullable = false, precision = 15, scale = 2)
 	private BigDecimal valorFinal;
+
+	public void calcularValorFinal() {
+		
+		BigDecimal valorCalculado = BigDecimal.ZERO;
+		
+		valorCalculado = valorCalculado.add(pizza.getTamanho().getValor());
+		
+		if(pizza.getPersonalizacoes() != null && !pizza.getPersonalizacoes().isEmpty())
+			for (PersonalizacaoDaPizza personalizacaoDaPizza : pizza.getPersonalizacoes())
+				valorCalculado = valorCalculado.add(personalizacaoDaPizza.getValorAdicional());
+		
+		setValorFinal(valorCalculado);
+	}
+	
+	public void calcularTempoDePreparo() {
+
+		Integer tempoCalculado = 0;
+		
+		tempoCalculado += pizza.getTamanho().getTempoDePreparo();
+		tempoCalculado += pizza.getSabor().getTempoAdicional();
+		
+		if(pizza.getPersonalizacoes() != null && !pizza.getPersonalizacoes().isEmpty())
+			for (PersonalizacaoDaPizza personalizacaoDaPizza : pizza.getPersonalizacoes())
+				tempoCalculado += personalizacaoDaPizza.getTempoAdicional();
+		
+		setTempoDePreparo(tempoCalculado);
+	}
+
+	public void resolverReferencias() {
+		pizza.setPedido(this);
+	}
 	
 }
