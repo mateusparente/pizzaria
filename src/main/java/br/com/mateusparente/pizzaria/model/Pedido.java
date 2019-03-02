@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,13 +22,14 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="PEDIDO")
-public class Pedido {
+public class Pedido extends ApiModel {
 
 	@Id
 	@Column(nullable = false, name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonIgnoreProperties("pedido")
 	@NotNull(message = "Nenhuma pizza no pedido")
 	@OneToOne(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
 	private Pizza pizza;

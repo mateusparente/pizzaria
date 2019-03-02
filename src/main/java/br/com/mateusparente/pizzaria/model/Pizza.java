@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="PIZZA")
-public class Pizza {
+public class Pizza extends ApiModel {
 
 	@Id
 	@Column(nullable = false, name="ID")
