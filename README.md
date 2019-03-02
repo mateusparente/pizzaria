@@ -1,7 +1,7 @@
 # pizzaria
 API para pedidos em Pizzaria
 
-A Documentação completa da API pode ser acessada em:
+A Documentação completa da API foi implementada usando Spring REST Docs e pode ser acessada em:
 {context}/docs/index.html
 
 Abaixo só alguns exemplos:
