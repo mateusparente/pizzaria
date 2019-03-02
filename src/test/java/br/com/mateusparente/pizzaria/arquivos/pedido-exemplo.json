@@ -1,0 +1,23 @@
+{
+	"pizza": {
+		"tamanho": {
+	        "id": 1,
+	        "descricao": "Pequena",
+	        "valor": 20,
+	        "tempoDePreparo": 15
+    	},
+    	"sabor": {
+	        "id": 1,
+	        "descricao": "Calabresa",
+	        "tempoAdicional": 0
+	    },
+	    "personalizacoes": [
+    		 {
+		        "id": 1,
+		        "descricao": "Extra bacon",
+		        "valorAdicional": 3,
+		        "tempoAdicional": 0
+		    }
+	    ]
+	}
+}

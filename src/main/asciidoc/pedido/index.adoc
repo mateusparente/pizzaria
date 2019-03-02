@@ -1,0 +1,15 @@
+[[buscarPorID]]
+=== Buscar por ID
+include::buscar-por-id/success.adoc[]
+
+[[salvar]]
+=== Salvar Pedido
+include::salvar/success.adoc[]
+
+[[atualizar]]
+=== Atualizar Pedido
+include::atualizar/success.adoc[]
+
+[[calcularTotais]]
+=== Calcular Totais do Pedido
+include::calcular-totais/success.adoc[]

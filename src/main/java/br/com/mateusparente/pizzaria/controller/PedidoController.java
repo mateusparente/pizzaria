@@ -45,11 +45,11 @@ public class PedidoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> save(@RequestBody @Valid Pedido pedido){
+	public ResponseEntity<Object> salvar(@RequestBody @Valid Pedido pedido){
 		
-		service.salvar(pedido);
+		Pedido pedidoSalvo = service.salvar(pedido);
 		
-		URI location = montarLocation(pedido);
+		URI location = montarLocation(pedidoSalvo);
 
 		return ResponseEntity.created(location).build();
 	}

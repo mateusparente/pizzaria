@@ -1,0 +1,12 @@
+
+==== Request
+include::{snippets}/deveriaBuscarPedidoPorID/http-request.adoc[]
+
+===== Path parameter
+include::{snippets}/deveriaBuscarPedidoPorID/path-parameters.adoc[]
+
+==== Response
+include::{snippets}/deveriaBuscarPedidoPorID/http-response.adoc[]
+
+==== cURL
+include::{snippets}/deveriaBuscarPedidoPorID/curl-request.adoc[]

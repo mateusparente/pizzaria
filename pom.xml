@@ -52,59 +52,46 @@
 			<artifactId>spring-restdocs-mockmvc</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.asciidoctor</groupId>
-				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>1.5.3</version>
-				<executions>
-					<execution>
-						<id>generate-docs</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>process-asciidoc</goal>
-						</goals>
-						<configuration>
-				            <sourceDocumentName>index.adoc</sourceDocumentName>
-				            <backend>html</backend>
-				            <attributes>
-				               <snippets>${project.build.directory}/generated-snippets</snippets>
-				            </attributes>
-				         </configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.springframework.restdocs</groupId>
-						<artifactId>spring-restdocs-asciidoctor</artifactId>
-						<version>${spring-restdocs.version}</version>
-					</dependency>
-				</dependencies>
+			    <groupId>org.asciidoctor</groupId>
+			    <artifactId>asciidoctor-maven-plugin</artifactId>
+			    <version>1.5.3</version>
+			    <dependencies>
+			        <dependency>
+			            <groupId>org.jruby</groupId>
+			            <artifactId>jruby-complete</artifactId>
+			            <version>1.7.21</version>
+			        </dependency>
+			    </dependencies>
+			    <configuration>
+			        <sourceDirectory>${project.basedir}/src/main/asciidoc/</sourceDirectory>
+			        <sourceDocumentName>index.adoc</sourceDocumentName>
+			        <backend>html5</backend>
+			        <outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>
+			        <attributes>
+			            <snippets>${project.build.directory}/generated-sources/snippets</snippets>
+			        </attributes>
+			    </configuration>
+			    <executions>
+			        <execution>
+			            <id>output-html</id>
+			            <phase>prepare-package</phase>
+			            <goals>
+			                <goal>process-asciidoc</goal>
+			            </goals>
+			        </execution>
+			    </executions>
 			</plugin>
 			
-			<plugin>
-			  <artifactId>maven-resources-plugin</artifactId>
-			  <executions>
-			    <execution>
-			      <id>copy-resources</id>
-			      <phase>prepare-package</phase>
-			      <goals>
-			        <goal>copy-resources</goal>
-			      </goals>
-			      <configuration>
-			        <outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>
-			        <resources>
-			          <resource>
-			            <directory>${project.build.directory}/generated-docs</directory>
-			          </resource>
-			        </resources>
-			      </configuration>
-			    </execution>
-			  </executions>
-			</plugin>
 			
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

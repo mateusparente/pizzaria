@@ -1,0 +1,15 @@
+
+==== Request
+include::{snippets}/deveriaListarTamanhosDePizza/http-request.adoc[]
+
+
+
+[[users_find_all_success_response]]
+==== Response
+include::{snippets}/deveriaListarTamanhosDePizza/http-response.adoc[]
+
+
+
+[[users_find_all_success_curl]]
+==== cURL
+include::{snippets}/deveriaListarTamanhosDePizza/curl-request.adoc[]

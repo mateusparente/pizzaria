@@ -1,38 +1,20 @@
-= Demo API
-thiagotn@gmail.com
+:sectnums:
+:sectnumlevels: 5
 :toc: left
+:toclevels: 3
+:page-layout: docs
 
-== Introduction
+= Pizzaria API
 
-This Demo API is intended to make it easy for you to understand how to use Spring REST Docs to produce high-quality documentation for your RESTful services.
+[[examples]]
+== Tamanho da Pizza
+include::pizza-tamanho/index.adoc[]
 
-== Resources
+== Sabor da Pizza
+include::pizza-sabor/index.adoc[]
 
-==== Create Product
+== Personalização da Pizza
+include::pizza-personalizacao/index.adoc[]
 
-.curl request
-include::{snippets}/ProductsControllerTest/shouldCreateProduct/curl-request.adoc[]
-
-.request
-include::{snippets}/ProductsControllerTest/shouldCreateProduct/http-request.adoc[]
-
-.response
-include::{snippets}/ProductsControllerTest/shouldCreateProduct/http-response.adoc[]
-
-.httpie request
-include::{snippets}/ProductsControllerTest/shouldCreateProduct/httpie-request.adoc[]
-
-.request body
-include::{snippets}/ProductsControllerTest/shouldCreateProduct/request-body.adoc[]
-
-.request fields
-include::{snippets}/ProductsControllerTest/shouldCreateProduct/request-fields.adoc[]
-
-.response body
-include::{snippets}/ProductsControllerTest/shouldCreateProduct/response-body.adoc[]
-
-
-== Contributions
-
-This Demo API is intended to make it easy for you to understand how to use Spring REST Docs to produce high-quality documentation for your RESTful services. However, we can’t achieve that goal without your contributions.
-Feel free to contribute to this repo (https://github.com/thiagotn/demo-api/), sending pull requests any time :)
+== Montar Pedido
+include::pedido/index.adoc[]

@@ -1,0 +1,15 @@
+
+==== Request
+include::{snippets}/deveriaListarPersonalizacoesDePizza/http-request.adoc[]
+
+
+
+[[users_find_all_success_response]]
+==== Response
+include::{snippets}/deveriaListarPersonalizacoesDePizza/http-response.adoc[]
+
+
+
+[[users_find_all_success_curl]]
+==== cURL
+include::{snippets}/deveriaListarPersonalizacoesDePizza/curl-request.adoc[]
